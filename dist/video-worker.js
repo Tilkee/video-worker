@@ -698,7 +698,10 @@ function () {
 
               if (e.data === YT.PlayerState.PLAYING) {
                 ytProgressInterval = setInterval(function () {
-                  self.fire('timeupdate', e); // check for end of video and play again or stop
+                  self.fire('timeupdate', {
+                    seconds: self.player.getCurrentTime(),
+                    duration: self.player.getDuration()
+                  }); // check for end of video and play again or stop
 
                   if (self.options.endTime && self.player.getCurrentTime() >= self.options.endTime) {
                     if (self.options.loop) {

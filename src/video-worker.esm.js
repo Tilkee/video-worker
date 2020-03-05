@@ -493,7 +493,7 @@ export default class VideoWorker {
                         // progress check
                         if (e.data === YT.PlayerState.PLAYING) {
                             ytProgressInterval = setInterval(() => {
-                                self.fire('timeupdate', e);
+                                self.fire('timeupdate', { seconds: self.player.getCurrentTime(), duration: self.player.getDuration() });
 
                                 // check for end of video and play again or stop
                                 if (self.options.endTime && self.player.getCurrentTime() >= self.options.endTime) {
