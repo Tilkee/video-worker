@@ -1,0 +1,47 @@
+<html>
+    <head>
+        <script src="./dist/video-worker.min.js"></script>
+        <script>
+            const videoObject = new VideoWorker('https://www.youtube.com/watch?v=ab0TSkLe-E0');
+
+            if (videoObject.isValid()) {
+                // retrieve iframe/video dom element.
+                videoObject.getVideo((video) => {
+                    const $parent = video.parentNode;
+
+                    // insert video in the body.
+                    document.body.appendChild(video);
+
+                    // remove temporary parent video element (created by VideoWorker).
+                    $parent.parentNode.removeChild($parent);
+                });
+
+                videoObject.on('timeupdate', (event) => {
+                    console.log(event);
+                });
+            }
+
+            const videoObject2 = new VideoWorker('https://vimeo.com/110138539');
+
+            if (videoObject2.isValid()) {
+                // retrieve iframe/video dom element.
+                videoObject2.getVideo((video) => {
+                    const $parent = video.parentNode;
+
+                    // insert video in the body.
+                    document.body.appendChild(video);
+
+                    // remove temporary parent video element (created by VideoWorker).
+                    $parent.parentNode.removeChild($parent);
+                });
+
+                videoObject2.on('timeupdate', (event) => {
+                    console.log(event);
+                });
+            }
+        </script>
+    </head>
+    <body>
+        <h1>My player</h1>
+    </body>
+</html>
